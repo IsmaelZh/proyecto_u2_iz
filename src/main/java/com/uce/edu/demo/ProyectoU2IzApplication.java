@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,10 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 		//p.setId(65);
 		p.setNombre("Pedro");
 		p.setApellido("Paredes");
+		p.setGenero("M");
+		p.setCedula("1796325896");
 		//Guardar
-		this.iPersonaJpaService.guardar(p);
+		//this.iPersonaJpaService.guardar(p);
 		
 		Persona p1 = new Persona();
 		p1.setId(9);
@@ -48,5 +52,12 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 		
 		//Eliminar
 		//this.iPersonaJpaService.eliminar(3);
+		
+	    List<Persona> listaPersona = this.iPersonaJpaService.buscarPorApellido("Paredes");
+	    for (Persona i : listaPersona) {
+	    	LOG.info("Persona: " + i);
+	    }
+		//LOG.info("Dato con JPA: " + this.iPersonaJpaService.buscarPorCedula("1796523281"));
+		
 	}
 }
