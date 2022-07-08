@@ -36,10 +36,10 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 
 		Persona p = new Persona();
 		//p.setId(65);
-		p.setNombre("Pedro");
-		p.setApellido("Paredes");
+		p.setNombre("Matias");
+		p.setApellido("Heredia");
 		p.setGenero("M");
-		p.setCedula("1796325896");
+		p.setCedula("0111569745");
 		//Guardar
 		//this.iPersonaJpaService.guardar(p);
 		
@@ -51,13 +51,25 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 		//this.iPersonaJpaService.actualizar(p1);
 		
 		//Eliminar
-		//this.iPersonaJpaService.eliminar(3);
+		//this.iPersonaJpaService.eliminar(12);
 		
-	    List<Persona> listaPersona = this.iPersonaJpaService.buscarPorApellido("Paredes");
-	    for (Persona i : listaPersona) {
-	    	LOG.info("Persona: " + i);
+		//LOG.info("Se encontro la persona: " + this.iPersonaJpaService.buscarPorCedula("1796325896"));
+		
+//	    List<Persona> listaPersona = this.iPersonaJpaService.buscarPorApellido("Paredes");
+//	    for (Persona i : listaPersona) {
+//	    	LOG.info("Persona: " + i);
+//	    }
+		
+	    List<Persona> listaPersona2 = this.iPersonaJpaService.buscarPorNombre("Ana");
+	    for (Persona i : listaPersona2) {
+	    	LOG.info("Persona buscada por nombre: " + i);
 	    }
-		//LOG.info("Dato con JPA: " + this.iPersonaJpaService.buscarPorCedula("1796523281"));
+	    
+	    List<Persona> listaPersona3 = this.iPersonaJpaService.buscarPorGenero("M");
+	    for (Persona i : listaPersona3) {
+	    	LOG.info("Persona buscada por genero: " + i);
+	    }
+		
 		
 	}
 }
