@@ -1,7 +1,5 @@
 package com.uce.edu.demo;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,6 @@ import com.uce.edu.demo.service.IPersonaJpaService;
 public class ProyectoU2IzApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-
-	@Autowired
-	private IPersonaJdbcService iPersonaJdbcService;
 
 	@Autowired
 	private IPersonaJpaService iPersonaJpaService;
@@ -60,16 +55,24 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 //	    	LOG.info("Persona: " + i);
 //	    }
 		
-	    List<Persona> listaPersona2 = this.iPersonaJpaService.buscarPorNombre("Ana");
-	    for (Persona i : listaPersona2) {
-	    	LOG.info("Persona buscada por nombre: " + i);
-	    }
+//	    List<Persona> listaPersona2 = this.iPersonaJpaService.buscarPorNombre("Ana");
+//	    for (Persona i : listaPersona2) {
+//	    	LOG.info("Persona buscada por nombre: " + i);
+//	    }
 	    
-	    List<Persona> listaPersona3 = this.iPersonaJpaService.buscarPorGenero("M");
-	    for (Persona i : listaPersona3) {
-	    	LOG.info("Persona buscada por genero: " + i);
-	    }
+//	    List<Persona> listaPersona3 = this.iPersonaJpaService.buscarPorGenero("M");
+//	    for (Persona i : listaPersona3) {
+//	    	LOG.info("Persona buscada por genero: " + i);
+//	    }
 		
-		
+		//Actualizar con JPQL
+	    int resultado = this.iPersonaJpaService.actualizarPorApellido("F", "Paredes");
+	    LOG.info("La cantidad de registros actualizados son: " + resultado);
+	    
+	    //Eliminar con JPQL
+	    int resultado2 = this.iPersonaJpaService.eliminarPorGenero("F");
+	    LOG.info("La cantidad de eliminados son: " + resultado2);
+	    
+	    
 	}
 }

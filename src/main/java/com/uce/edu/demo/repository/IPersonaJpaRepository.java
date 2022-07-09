@@ -16,4 +16,7 @@ public interface IPersonaJpaRepository {
 	public void actualizar (Persona persona);
 	public void eliminar (Integer id);
 	
+	public int actualizarPorApellido(String genero,String apellido);
+	public int eliminarPorGenero(String genero);
+	
 }
