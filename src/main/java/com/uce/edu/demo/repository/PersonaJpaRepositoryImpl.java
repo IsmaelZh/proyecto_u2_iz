@@ -78,7 +78,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 	}
 
 	@Override
-	public int actualizarPorApellido(String genero, String apellido) {//int si se requiere sabercuantos se actualizaron, caso contrario VOID
+	public int actualizarPorApellido(String genero, String apellido) {//int si se requiere saber cuantos se actualizaron, caso contrario VOID
         // TODO Auto-generated method stub
         Query myQuery = this.entityManager.createQuery("UPDATE Persona p SET p.genero = :datoGenero WHERE p.apellido = :datoApellido ");
         myQuery.setParameter("datoGenero", genero);
