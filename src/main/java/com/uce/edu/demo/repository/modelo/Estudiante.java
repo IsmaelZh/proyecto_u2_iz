@@ -2,75 +2,96 @@ package com.uce.edu.demo.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "estudiante")
+@NamedQuery(name = "Estudiante.buscarPorCedula", query = "SELECT e FROM Estudiante e WHERE e.cedula = :datoCedula")
+@NamedQuery(name = "Estudiante.buscarPorCarrera", query = "SELECT e FROM Estudiante e WHERE e.carrera = :datoCarrera ORDER BY e.apellido asc")
+@NamedQuery(name = "Estudiante.buscarPorEdad", query = "SELECT e FROM Estudiante e WHERE e.edad = :datoEdad")
+@NamedQuery(name = "Estudiante.buscarPorApellidoEdad", query = "SELECT e FROM Estudiante e WHERE e.apellido = :datoApellido AND e.edad = :datoEdad ORDER BY e.nombre asc")
+
 public class Estudiante {
 
-		@Id
-		@Column (name = "id")
-	    private Integer id;
-		
-		@Column (name = "nombre")
-	    private String nombre;
-		
-		@Column (name = "apellido")
-	    private String apellido;
-		
-		@Column (name = "edad")
-		private Integer edad;
-		
-		@Column (name = "carrera")
-		private String carrera;
-		
-		@Override
-		public String toString() {
-			return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad
-					+ ", carrera=" + carrera + "]";
-		}
+	@Id
+	@Column(name = "estu_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estu_id_seq")
+	@SequenceGenerator(name = "estu_id_seq", sequenceName = "estu_id_seq", allocationSize = 1)
+	private Integer id;
 
-		//Get y Set 
-		public Integer getId() {
-			return id;
-		}
+	@Column(name = "estu_cedula")
+	private String cedula;
 
-		public void setId(Integer id) {
-			this.id = id;
-		}
+	@Column(name = "estu_nombre")
+	private String nombre;
 
-		public String getNombre() {
-			return nombre;
-		}
+	@Column(name = "estu_apellido")
+	private String apellido;
 
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
+	@Column(name = "estu_edad")
+	private Integer edad;
 
-		public String getApellido() {
-			return apellido;
-		}
+	@Column(name = "estu_carrera")
+	private String carrera;
 
-		public void setApellido(String apellido) {
-			this.apellido = apellido;
-		}
+	@Override
+	public String toString() {
+		return "Estudiante [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", edad=" + edad + ", carrera=" + carrera + "]";
+	}
 
-		public Integer getEdad() {
-			return edad;
-		}
+	// Get y Set
+	public Integer getId() {
+		return id;
+	}
 
-		public void setEdad(Integer edad) {
-			this.edad = edad;
-		}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-		public String getCarrera() {
-			return carrera;
-		}
+	public String getCedula() {
+		return cedula;
+	}
 
-		public void setCarrera(String carrera) {
-			this.carrera = carrera;
-		}
-		
-	
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
+	}
+
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
+	}
+
 }
