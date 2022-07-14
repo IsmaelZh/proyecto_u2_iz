@@ -55,7 +55,31 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
 		// TODO Auto-generated method stub
 		return this.estudianteJpaRepository.buscarPorApellidoEdadTypedNamed(apellido, edad);
 	}
-	
+
+	@Override
+	public Estudiante buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCedulaNative(cedula);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraNative(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraNative(carrera);
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCedulaNamedNative(cedula);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNamedNative(Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorEdadNamedNative(edad);
+	}
+
 	@Override
 	public void insertar(Estudiante estudiante) {
 		// TODO Auto-generated method stub
@@ -73,7 +97,5 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
 		// TODO Auto-generated method stub
 		this.estudianteJpaRepository.eliminar(id);
 	}
-
-
 
 }

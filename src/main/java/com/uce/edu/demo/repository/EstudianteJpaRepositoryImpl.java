@@ -42,7 +42,8 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 	@Override
 	public List<Estudiante> buscarPorCarreraTyped(String carrera) {
 		// TODO Auto-generated method stub
-		TypedQuery<Estudiante> myTypedQuery = this.entityManager.createQuery("SELECT e FROM Estudiante e WHERE e.carrera = :datoCarrera", Estudiante.class);
+		TypedQuery<Estudiante> myTypedQuery = this.entityManager
+				.createQuery("SELECT e FROM Estudiante e WHERE e.carrera = :datoCarrera", Estudiante.class);
 		myTypedQuery.setParameter("datoCarrera", carrera);
 		return myTypedQuery.getResultList();
 	}
@@ -66,18 +67,57 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 	@Override
 	public List<Estudiante> buscarPorCarreraTypedNamed(String carrera) {
 		// TODO Auto-generated method stub
-		TypedQuery<Estudiante> myTypedNamedQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorCarrera", Estudiante.class);
-        myTypedNamedQuery.setParameter("datoCarrera", carrera);
-        return myTypedNamedQuery.getResultList();
+		TypedQuery<Estudiante> myTypedNamedQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorCarrera",
+				Estudiante.class);
+		myTypedNamedQuery.setParameter("datoCarrera", carrera);
+		return myTypedNamedQuery.getResultList();
 	}
 
 	@Override
 	public List<Estudiante> buscarPorApellidoEdadTypedNamed(String apellido, Integer edad) {
 		// TODO Auto-generated method stub
-		TypedQuery<Estudiante> myTypedNamedQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorApellidoEdad", Estudiante.class);
-        myTypedNamedQuery.setParameter("datoApellido", apellido);
-        myTypedNamedQuery.setParameter("datoEdad", edad);
-        return myTypedNamedQuery.getResultList();
+		TypedQuery<Estudiante> myTypedNamedQuery = this.entityManager
+				.createNamedQuery("Estudiante.buscarPorApellidoEdad", Estudiante.class);
+		myTypedNamedQuery.setParameter("datoApellido", apellido);
+		myTypedNamedQuery.setParameter("datoEdad", edad);
+		return myTypedNamedQuery.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager
+				.createNativeQuery("SELECT * FROM estudiante WHERE estu_cedula = :datoCedula ", Estudiante.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return (Estudiante) myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraNative(String carrera) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery(
+				"SELECT * FROM estudiante WHERE estu_carrera = :datoCarrera ORDER BY estu_apellido asc",
+				Estudiante.class);
+		myQuery.setParameter("datoCarrera", carrera);
+		return (List<Estudiante>) myQuery.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.BuscarPorCedulaNative",
+				Estudiante.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNamedNative(Integer edad) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.BuscarPorEdadNative",
+				Estudiante.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
 	}
 
 	@Override

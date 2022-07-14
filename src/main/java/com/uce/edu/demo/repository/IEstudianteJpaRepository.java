@@ -9,10 +9,14 @@ public interface IEstudianteJpaRepository {
 	public Estudiante buscar (Integer id);
 	public Estudiante buscarPorCedulaTyped (String cedula);
 	public List<Estudiante> buscarPorCarreraTyped(String carrera);
-	public Estudiante buscarPorCedulaNamed (String cedula);
+	public Estudiante buscarPorCedulaNamed(String cedula);
 	public List<Estudiante> buscarPorEdadNamed(Integer edad);
 	public List<Estudiante> buscarPorCarreraTypedNamed(String carrera);
 	public List<Estudiante> buscarPorApellidoEdadTypedNamed(String apellido, Integer edad);
+	public Estudiante buscarPorCedulaNative(String cedula);
+	public List<Estudiante> buscarPorCarreraNative(String carrera);
+	public Estudiante buscarPorCedulaNamedNative(String cedula);
+	public List<Estudiante> buscarPorEdadNamedNative(Integer edad);
 	public void insertar (Estudiante estudiante);
 	public void actualizar (Estudiante estudiante);
 	public void eliminar (Integer id);
