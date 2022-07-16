@@ -10,14 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.repository.modelo.Estudiante;
+import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.service.IEstudianteJpaService;
+import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2IzApplication implements CommandLineRunner {
 	private static final Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
 	@Autowired
-	private IEstudianteJpaService estudianteJpaService;
+	private IPersonaJpaService iPersonaJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2IzApplication.class, args);
@@ -26,24 +28,11 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		LOG.info("\n---------------------------------------------------------------- Ejemplos NativeQuery -----------------------------------------------");
-		// 1.
-		LOG.info("Se encontro con NativeQuery: " + this.estudianteJpaService.buscarPorCedulaNative("1798985656"));
-		// 2.
-		List<Estudiante> listaEstudianteN = this.estudianteJpaService.buscarPorCarreraNative("Ing. Sistemas");
-		for (Estudiante i : listaEstudianteN) {
-			LOG.info("Estudiante con NativeQuery " + i);
-		}
-		
-		LOG.info("\n---------------------------------------------------------------- Ejemplos NamedNativeQuery -----------------------------------------------");
-		// 1.
-		LOG.info("Se encontro con NamedNativeQuery: " + this.estudianteJpaService.buscarPorCedulaNamedNative("2555669899"));
-		// 2.
-		int edad = 18;
-		List<Estudiante> listaEstudianteNN = this.estudianteJpaService.buscarPorEdadNamedNative(edad);
-		for (Estudiante i : listaEstudianteNN) {
-			LOG.info("Estudiante mayor a " + edad + " NamedNativeQuery: " + i);
-		}
 
+		Persona per = this.iPersonaJpaService.buscarPorCedulaCriteriaApi("1796325874");
+		LOG.info("Persona Criteria API: " + per );
+
+		Persona perDinamica = this.iPersonaJpaService.buscarDinamicamente("Ana", "Yunda", "F");
+		LOG.info("Persona Dinamica: " + perDinamica );
 	}
 }

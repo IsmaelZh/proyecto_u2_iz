@@ -9,11 +9,11 @@ import com.uce.edu.demo.repository.IPersonaJpaRepository;
 import com.uce.edu.demo.repository.modelo.Persona;
 
 @Service
-public class PersonaJpaServiceImpl implements IPersonaJpaService{
+public class PersonaJpaServiceImpl implements IPersonaJpaService {
 
 	@Autowired
 	private IPersonaJpaRepository iPersonaJpaRepository;
-	
+
 	@Override
 	public Persona buscar(Integer id) {
 		// TODO Auto-generated method stub
@@ -43,7 +43,7 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService{
 		// TODO Auto-generated method stub
 		return this.iPersonaJpaRepository.buscarPorCedula(cedula);
 	}
-	
+
 	@Override
 	public Persona buscarPorCedulaTyped(String cedula) {
 		// TODO Auto-generated method stub
@@ -55,7 +55,7 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService{
 		// TODO Auto-generated method stub
 		return this.iPersonaJpaRepository.buscarPorCedulaNamed(cedula);
 	}
-	
+
 	@Override
 	public Persona buscarPorCedulaTypedNamed(String cedula) {
 		// TODO Auto-generated method stub
@@ -67,11 +67,23 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService{
 		// TODO Auto-generated method stub
 		return this.iPersonaJpaRepository.buscarPorCedulaNative(cedula);
 	}
-	
+
 	@Override
 	public Persona buscarPorCedulaNamedNative(String cedula) {
 		// TODO Auto-generated method stub
 		return this.iPersonaJpaRepository.buscarPorCedulaNamedNative(cedula);
+	}
+
+	@Override
+	public Persona buscarPorCedulaCriteriaApi(String cedula) {
+		// TODO Auto-generated method stub
+		return this.iPersonaJpaRepository.buscarPorCedulaCriteriaApi(cedula);
+	}
+
+	@Override
+	public Persona buscarDinamicamente(String nombre, String apellido, String genero) {
+		// TODO Auto-generated method stub
+		return this.iPersonaJpaRepository.buscarDinamicamente(nombre, apellido, genero);
 	}
 	
 	@Override
@@ -85,7 +97,7 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService{
 		// TODO Auto-generated method stub
 		return this.iPersonaJpaRepository.buscarPorNombreApellido(apellido, nombre);
 	}
-	
+
 	@Override
 	public List<Persona> buscarPorNombre(String nombre) {
 		// TODO Auto-generated method stub
@@ -109,12 +121,6 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService{
 		// TODO Auto-generated method stub
 		return this.iPersonaJpaRepository.eliminarPorGenero(genero);
 	}
-
-
-
-
-
-
 
 
 
