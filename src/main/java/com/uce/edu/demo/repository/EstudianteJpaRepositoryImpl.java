@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -118,6 +122,63 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 				Estudiante.class);
 		myQuery.setParameter("datoEdad", edad);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraEdadCriteriaAPI(String carrera, Integer edad) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Estudiante> myQuery = myBuilder.createQuery(Estudiante.class);
+
+		Root<Estudiante> estudianteFrom = myQuery.from(Estudiante.class);
+
+		Predicate predicadoCarrera = myBuilder.equal(estudianteFrom.get("carrera"), carrera);
+		Predicate predicadoEdad = myBuilder.equal(estudianteFrom.get("edad"), edad);
+
+		Predicate myPredicadoFinal = myBuilder.and(predicadoCarrera, predicadoEdad);
+
+		myQuery.select(estudianteFrom).where(myPredicadoFinal);
+
+		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
+
+		return myQueryFinal.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String carrera,
+			Integer edad) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Estudiante> myQuery = myBuilder.createQuery(Estudiante.class);
+
+		Root<Estudiante> estudianteFrom = myQuery.from(Estudiante.class);
+
+		Predicate predicadoNombre = myBuilder.equal(estudianteFrom.get("nombre"), nombre);
+		Predicate predicadoApellido = myBuilder.equal(estudianteFrom.get("apellido"), apellido);
+		Predicate predicadoCarrera = myBuilder.equal(estudianteFrom.get("carrera"), carrera);
+		Predicate predicadoEdad = myBuilder.equal(estudianteFrom.get("edad"), edad);
+
+		Predicate predicadoFinal = null;
+
+		if (edad < 18) {
+
+			predicadoFinal = myBuilder.or(predicadoNombre, predicadoApellido);
+			predicadoFinal = myBuilder.and(predicadoFinal, predicadoCarrera);
+
+		} else {
+
+			predicadoFinal = myBuilder.and(predicadoCarrera, predicadoEdad);
+
+		}
+
+		myQuery.select(estudianteFrom).where(predicadoFinal);
+
+		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
+
+		return myQueryFinal.getResultList();
+
 	}
 
 	@Override

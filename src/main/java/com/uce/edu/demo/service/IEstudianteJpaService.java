@@ -17,6 +17,8 @@ public interface IEstudianteJpaService {
 	public List<Estudiante> buscarPorCarreraNative(String carrera);
 	public Estudiante buscarPorCedulaNamedNative(String cedula);
 	public List<Estudiante> buscarPorEdadNamedNative(Integer edad);
+	public List<Estudiante> buscarPorCarreraEdadCriteriaAPI(String carrera, Integer edad);
+	public List<Estudiante> buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String carrera, Integer edad);
 	public void insertar(Estudiante estudiante);
 	public void actualizar (Estudiante estudiante);
 	public void eliminar (Integer id);

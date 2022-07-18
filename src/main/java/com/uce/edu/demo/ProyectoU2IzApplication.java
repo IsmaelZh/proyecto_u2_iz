@@ -10,16 +10,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.repository.modelo.Estudiante;
-import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.service.IEstudianteJpaService;
-import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2IzApplication implements CommandLineRunner {
 	private static final Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService estudianteJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2IzApplication.class, args);
@@ -29,10 +27,15 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Persona per = this.iPersonaJpaService.buscarPorCedulaCriteriaApi("1796325874");
-		LOG.info("Persona Criteria API: " + per );
+		List<Estudiante> listaEstudiante = this.estudianteJpaService.buscarPorCarreraEdadCriteriaAPI("Veterinaria", 22);
+		for (Estudiante i : listaEstudiante) {
+			LOG.info("Estudiante con Criteria API " + i);
+		}
 
-		Persona perDinamica = this.iPersonaJpaService.buscarDinamicamente("Ana", "Yunda", "F");
-		LOG.info("Persona Dinamica: " + perDinamica );
+		List<Estudiante> listaEstudianteD = this.estudianteJpaService.buscarDinamicamenteCriteriaAPI("Ariel", "Andrade", "Ing. Civil", 17);
+		for (Estudiante i : listaEstudianteD) {
+			LOG.info("Estudiante con Criteria API " + i);
+		}
+
 	}
 }

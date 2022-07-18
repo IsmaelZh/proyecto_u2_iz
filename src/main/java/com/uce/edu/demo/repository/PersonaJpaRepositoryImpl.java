@@ -102,8 +102,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public Persona buscarPorCedulaCriteriaApi(String cedula) {
 		// TODO Auto-generated method stub
-		// Creamos una instancia de la interfaz CriteriaBuilder Fabrica para construir
-		// el SQL
+		// Creamos una instancia de la interfaz CriteriaBuilder, Fabrica para construir el SQL
 		CriteriaBuilder myBuilder = entityManager.getCriteriaBuilder();
 
 		// Especificamos el retorno de mi SQL
@@ -114,7 +113,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 		Root<Persona> personaFrom = myQuery.from(Persona.class);// From Persona
 
 		// Las condiciones where en criteria API se los conoce como predicados
-		Predicate p1 = myBuilder.equal(personaFrom.get("cedula"), cedula);// p.cedula = :datoCedula
+		Predicate p1 = myBuilder.equal(personaFrom.get("cedula"), cedula); // p.cedula = :datoCedula
 		myQuery.select(personaFrom).where(p1);
 
 		// CriteriaQuery<Persona> myQueryCompleto = myQuery.select(personaFrom).where(p1);
@@ -136,14 +135,13 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 		Predicate predicadoNombre = myCriteria.equal(myTabla.get("nombre"), nombre);
 		// pers_apellido = ''
 		Predicate predicadoApellido = myCriteria.equal(myTabla.get("apellido"), apellido);
-		// pers_genero = ''
-		Predicate predicadoGenero = myCriteria.equal(myTabla.get("genero"), genero);
+		
 		// pers_nombre = '' AND pers_apellido = ''
 		Predicate myPredicadoFinal = null;
 		if (genero.equals("M")) {
-			myPredicadoFinal = myCriteria.and(predicadoNombre, predicadoApellido, predicadoGenero);
+			myPredicadoFinal = myCriteria.and(predicadoNombre, predicadoApellido);
 		} else {
-			myPredicadoFinal = myCriteria.or(predicadoNombre, predicadoApellido, predicadoGenero);
+			myPredicadoFinal = myCriteria.or(predicadoNombre, predicadoApellido);
 		}
 
 		myQuery.select(myTabla).where(myPredicadoFinal);
@@ -152,7 +150,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 
 		return myQueryFinal.getSingleResult();
 	}
-
+	
 	@Override
 	public List<Persona> buscarPorApellido(String apellido) {
 		// TODO Auto-generated method stub

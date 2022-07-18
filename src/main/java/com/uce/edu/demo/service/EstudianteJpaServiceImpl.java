@@ -81,6 +81,19 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
 	}
 
 	@Override
+	public List<Estudiante> buscarPorCarreraEdadCriteriaAPI(String carrera, Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraEdadCriteriaAPI(carrera, edad);
+	}
+	
+	@Override
+	public List<Estudiante> buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String carrera,
+			Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarDinamicamenteCriteriaAPI(nombre, apellido, carrera, edad);
+	}
+	
+	@Override
 	public void insertar(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		this.estudianteJpaRepository.insertar(estudiante);
