@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 
 @Repository
 @Transactional
@@ -102,7 +104,8 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public Persona buscarPorCedulaCriteriaApi(String cedula) {
 		// TODO Auto-generated method stub
-		// Creamos una instancia de la interfaz CriteriaBuilder, Fabrica para construir el SQL
+		// Creamos una instancia de la interfaz CriteriaBuilder, Fabrica para construir
+		// el SQL
 		CriteriaBuilder myBuilder = entityManager.getCriteriaBuilder();
 
 		// Especificamos el retorno de mi SQL
@@ -116,7 +119,8 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 		Predicate p1 = myBuilder.equal(personaFrom.get("cedula"), cedula); // p.cedula = :datoCedula
 		myQuery.select(personaFrom).where(p1);
 
-		// CriteriaQuery<Persona> myQueryCompleto = myQuery.select(personaFrom).where(p1);
+		// CriteriaQuery<Persona> myQueryCompleto =
+		// myQuery.select(personaFrom).where(p1);
 		// Finalizado mi query completo
 		TypedQuery<Persona> myQueryFinal = this.entityManager.createQuery(myQuery);
 
@@ -135,7 +139,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 		Predicate predicadoNombre = myCriteria.equal(myTabla.get("nombre"), nombre);
 		// pers_apellido = ''
 		Predicate predicadoApellido = myCriteria.equal(myTabla.get("apellido"), apellido);
-		
+
 		// pers_nombre = '' AND pers_apellido = ''
 		Predicate myPredicadoFinal = null;
 		if (genero.equals("M")) {
@@ -150,7 +154,19 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 
 		return myQueryFinal.getSingleResult();
 	}
-	
+
+	@Override
+	public List<PersonaSencilla> buscarPorApellidoSencillo(String apellido) {
+		// TODO Auto-generated method stub
+		TypedQuery<PersonaSencilla> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.PersonaSencilla(p.nombre, p.apellido) FROM Persona p WHERE p.apellido = :datoApellido",
+				PersonaSencilla.class);
+		myQuery.setParameter("datoApellido", apellido);
+
+		return myQuery.getResultList();
+
+	}
+
 	@Override
 	public List<Persona> buscarPorApellido(String apellido) {
 		// TODO Auto-generated method stub
@@ -203,6 +219,13 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 		Query myQuery = this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero = :datoGenero");
 		myQuery.setParameter("datoGenero", genero);
 		return myQuery.executeUpdate();
+	}
+
+	@Override
+	public List<PersonaContadorGenero> consultarCantidadPorGenero() {
+		// TODO Auto-generated method stub
+		TypedQuery<PersonaContadorGenero> myQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.demo.repository.modelo.PersonaContadorGenero(p.genero, COUNT(p.genero)) FROM Persona p GROUP BY p.genero", PersonaContadorGenero.class);
+		return myQuery.getResultList();
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.repository.IPersonaJdbcRepository;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
 import com.uce.edu.demo.to.PersonaTo;
 
 @Service
@@ -44,8 +45,5 @@ public class PersonaJdbcServiceImpl implements IPersonaJdbcService{
 		return this.iPersonaJdbcRepository.buscarTodos();
 	}
 
-
-	
-	
-
+		
 }
