@@ -9,9 +9,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.demo.repository.modelo.EstudianteContadorCarrera;
+import com.uce.edu.demo.repository.modelo.EstudianteSencillo;
 import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
 import com.uce.edu.demo.repository.modelo.PersonaSencilla;
+import com.uce.edu.demo.service.IEstudianteJpaService;
 import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
@@ -24,29 +27,21 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService estudianteJpaService;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Persona p = new Persona();
-		// p.setId(65);
-		p.setNombre("Luis");
-		p.setApellido("Miranda");
-		p.setGenero("M");
-		p.setCedula("0262626262");
-		// Guardar
-		//this.iPersonaJpaService.guardar(p);
 		
-		List<PersonaSencilla> listaPersonaSencilla =  this.iPersonaJpaService.buscarPorApellidoSencillo("Arco");
-		for(PersonaSencilla i : listaPersonaSencilla) {
-			LOG.info("Persona Sencilla " + i);
+		List<EstudianteSencillo> listaEstudianteSencillo =  this.estudianteJpaService.buscarPorCarreaSencillo("Veterinaria");
+		for(EstudianteSencillo i : listaEstudianteSencillo) {
+			LOG.info("Estudiante Sencillo: " + i);
 		}
 		
-		List<PersonaContadorGenero> listaPersonaGenero =  this.iPersonaJpaService.consultarCantidadPorGenero();
-		for(PersonaContadorGenero i : listaPersonaGenero) {
-			LOG.info("Persona Contador Genero " + i);
+		List<EstudianteContadorCarrera> listaEstudianteCarrera =  this.estudianteJpaService.consultarCantidadCarreraPorEdad(18);
+		for(EstudianteContadorCarrera i : listaEstudianteCarrera) {
+			LOG.info("Carrera: " + i);
 		}
 	}
 }

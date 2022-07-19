@@ -17,7 +17,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Estudiante;
+import com.uce.edu.demo.repository.modelo.EstudianteContadorCarrera;
+import com.uce.edu.demo.repository.modelo.EstudianteSencillo;
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
 
 @Repository
 @Transactional
@@ -179,6 +182,27 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 
 		return myQueryFinal.getResultList();
 
+	}
+
+	@Override
+	public List<EstudianteSencillo> buscarPorCarreaSencillo(String carrera) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteSencillo> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.EstudianteSencillo(e.carrera, e.apellido, e.cedula) FROM Estudiante e WHERE e.carrera = :datoCarrera",
+				EstudianteSencillo.class);
+		myQuery.setParameter("datoCarrera", carrera);
+
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteContadorCarrera> consultarCantidadCarreraPorEdad(Integer edad) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteContadorCarrera> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.EstudianteContadorCarrera(e.carrera, COUNT(e.carrera)) FROM Estudiante e WHERE e.edad > :datoEdad GROUP BY e.carrera",
+				EstudianteContadorCarrera.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
 	}
 
 	@Override
