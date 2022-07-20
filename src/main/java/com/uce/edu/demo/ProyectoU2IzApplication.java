@@ -1,6 +1,6 @@
 package com.uce.edu.demo;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,13 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.EstudianteContadorCarrera;
-import com.uce.edu.demo.repository.modelo.EstudianteSencillo;
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
-import com.uce.edu.demo.repository.modelo.PersonaSencilla;
-import com.uce.edu.demo.service.IEstudianteJpaService;
-import com.uce.edu.demo.service.IPersonaJpaService;
+import com.uce.edu.demo.repository.modelo.Ciudadano;
+import com.uce.edu.demo.repository.modelo.Empleado;
+import com.uce.edu.demo.service.ICiudadanoJpaService;
+import com.uce.edu.demo.service.IEmpleadoJpaService;
 
 @SpringBootApplication
 public class ProyectoU2IzApplication implements CommandLineRunner {
@@ -27,21 +24,28 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private IEstudianteJpaService estudianteJpaService;
+	private ICiudadanoJpaService ciudadanoJpaService;
+	
+	@Autowired
+	private IEmpleadoJpaService empleadoJpaService;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
 		
-		List<EstudianteSencillo> listaEstudianteSencillo =  this.estudianteJpaService.buscarPorCarreaSencillo("Veterinaria");
-		for(EstudianteSencillo i : listaEstudianteSencillo) {
-			LOG.info("Estudiante Sencillo: " + i);
-		}
+		Ciudadano ciu1= new Ciudadano();
+        ciu1.setNombre("Ana");
+        ciu1.setApellido("Obredo");
+
+        Empleado empl1 = new Empleado();
+        empl1.setCodigoIess("00112");
+        empl1.setSalario(new BigDecimal(100));
+        empl1.setCiudadano(ciu1);
+
+        ciu1.setEmpleado(empl1);
+
+        this.ciudadanoJpaService.insertar(ciu1);
 		
-		List<EstudianteContadorCarrera> listaEstudianteCarrera =  this.estudianteJpaService.consultarCantidadCarreraPorEdad(18);
-		for(EstudianteContadorCarrera i : listaEstudianteCarrera) {
-			LOG.info("Carrera: " + i);
-		}
 	}
 }
