@@ -1,0 +1,129 @@
+package com.uce.edu.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.uce.edu.demo.repository.IEstudianteJpaRepository;
+import com.uce.edu.demo.repository.modelo.Estudiante;
+import com.uce.edu.demo.repository.modelo.EstudianteContadorCarrera;
+import com.uce.edu.demo.repository.modelo.EstudianteSencillo;
+
+@Service
+public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
+
+	@Autowired
+	private IEstudianteJpaRepository estudianteJpaRepository;
+
+	@Override
+	public Estudiante buscar(Integer id) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscar(id);
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaTyped(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCedulaTyped(cedula);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraTyped(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraTyped(carrera);
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNamed(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCedulaNamed(cedula);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNamed(Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorEdadNamed(edad);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraTypedNamed(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraTypedNamed(carrera);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorApellidoEdadTypedNamed(String apellido, Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorApellidoEdadTypedNamed(apellido, edad);
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCedulaNative(cedula);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraNative(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraNative(carrera);
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCedulaNamedNative(cedula);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNamedNative(Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorEdadNamedNative(edad);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraEdadCriteriaAPI(String carrera, Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraEdadCriteriaAPI(carrera, edad);
+	}
+
+	@Override
+	public List<Estudiante> buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String carrera,
+			Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarDinamicamenteCriteriaAPI(nombre, apellido, carrera, edad);
+	}
+
+	@Override
+	public List<EstudianteSencillo> buscarPorCarreaSencillo(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreaSencillo(carrera);
+	}
+
+	@Override
+	public List<EstudianteContadorCarrera> consultarCantidadCarreraPorEdad(Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.consultarCantidadCarreraPorEdad(edad);
+
+	}
+
+	@Override
+	public void insertar(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		this.estudianteJpaRepository.insertar(estudiante);
+	}
+
+	@Override
+	public void actualizar(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		this.estudianteJpaRepository.actualizar(estudiante);
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		// TODO Auto-generated method stub
+		this.estudianteJpaRepository.eliminar(id);
+	}
+
+}
