@@ -1,6 +1,6 @@
 package com.uce.edu.demo.repository;
 
-import com.uce.edu.demo.repository.modelo.CiudadanoTarea;
+import com.uce.edu.demo.repository.modelo.onetoone.CiudadanoTarea;
 
 public interface ICiudadoTareaJpaRepo {
 

@@ -1,4 +1,4 @@
-package com.uce.edu.demo.repository.modelo;
+package com.uce.edu.demo.repository.modelo.onetoone;
 
 import java.time.LocalDateTime;
 
@@ -35,11 +35,11 @@ public class Pasaporte {
 	@JoinColumn(name = "pasa_id_ciudadano")
 	private CiudadanoTarea ciudadano;
 
-//	@Override
-//	public String toString() {
-//		return "Pasaporte [id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", fechaCaducidad="
-//				+ fechaCaducidad + ", ciudadano=" + ciudadano + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Pasaporte [id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", fechaCaducidad="
+				+ fechaCaducidad + "]";
+	}
 
 	//Set y Get
 	public Integer getId() {

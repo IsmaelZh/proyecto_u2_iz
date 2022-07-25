@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.repository.ICiudadoTareaJpaRepo;
-import com.uce.edu.demo.repository.modelo.CiudadanoTarea;
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.onetoone.CiudadanoTarea;
 
 @Service
 public class CiudadanoTareaJpaServiceImpl implements ICiudadadoTareaJpaService {

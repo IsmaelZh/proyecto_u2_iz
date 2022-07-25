@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.time.LocalDateTime;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
-import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
-import com.uce.edu.demo.service.IHabitacionService;
-import com.uce.edu.demo.service.IHotelService;
+import com.uce.edu.demo.repository.modelo.onetomany.Equipo;
+import com.uce.edu.demo.service.IEquipoService;
 
 @SpringBootApplication
 public class ProyectoU2IzApplication implements CommandLineRunner {
@@ -22,45 +22,35 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private IHotelService hotelService;
-
-	@Autowired
-	private IHabitacionService habitacionService;
+	private IEquipoService equipoService;
 
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Hotel hotel = new Hotel();
-		hotel.setNombre("Transilvania");
-		hotel.setDireccion("Rumania");
+		// INSERTAR
+		Equipo equipo = new Equipo();
+		equipo.setNombre("Delfin");
+		equipo.setLocalidad("Manabi");
+		equipo.setFechacreacion(LocalDateTime.of(1989,3, 1, 14, 20));
+		
+		this.equipoService.insertar(equipo);
 
-		// this.hotelService.insertar(hotel);
+		// BUSCAR
+		LOG.info("Se encontro el equipo: " + this.equipoService.buscar("Liga"));
 
-		Habitacion habi = new Habitacion();
-		habi.setNumero("A198");
-		habi.setPiso("10");
-		habi.setTipo("Familiar");
+		// ACTUALIZAR
 
-		// this.habitacionService.insertar(habi);
+		Equipo equipo1 = new Equipo();
+		equipo1.setId(4);
+		equipo1.setNombre("Barcelona");
+		equipo1.setLocalidad("España");
+		equipo1.setFechacreacion(LocalDateTime.of(1899,11, 29, 20, 15));
 
-		Hotel hotel1 = new Hotel();
-		hotel1.setId(1);
-
-		Habitacion habitacion1 = new Habitacion();
-		habitacion1.setNumero("A1");
-		habitacion1.setPiso("2");
-		habitacion1.setTipo("matrimonial");
-		habitacion1.setHotel(hotel1);
-
-		Habitacion habitacion2 = new Habitacion();
-		habitacion2.setNumero("A2");
-		habitacion2.setTipo("solitario");
-		habitacion2.setPiso("2");
-		habitacion2.setHotel(hotel1);
-
-		this.habitacionService.insertar(habitacion1);
-
+		this.equipoService.actualizar(equipo1);
+		
+		// ELIMINAR
+		this.equipoService.eliminar("Elemec");
 	}
 
 }

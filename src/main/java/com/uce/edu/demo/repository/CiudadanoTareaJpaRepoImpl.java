@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.CiudadanoTarea;
+import com.uce.edu.demo.repository.modelo.onetoone.CiudadanoTarea;
 
 @Repository
 @Transactional
