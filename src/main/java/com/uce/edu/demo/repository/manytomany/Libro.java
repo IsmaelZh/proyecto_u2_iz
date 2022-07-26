@@ -1,6 +1,5 @@
 package com.uce.edu.demo.repository.manytomany;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
