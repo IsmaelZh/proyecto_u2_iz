@@ -1,6 +1,7 @@
 package com.uce.edu.demo;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,8 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Equipo;
-import com.uce.edu.demo.service.IEquipoService;
+import com.uce.edu.demo.repository.manytomany.Autor;
+import com.uce.edu.demo.repository.manytomany.Libro;
+import com.uce.edu.demo.service.ILibroService;
 
 @SpringBootApplication
 public class ProyectoU2IzApplication implements CommandLineRunner {
@@ -22,35 +24,31 @@ public class ProyectoU2IzApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private IEquipoService equipoService;
-
+	private ILibroService iLibroService;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		// INSERTAR
-		Equipo equipo = new Equipo();
-		equipo.setNombre("Delfin");
-		equipo.setLocalidad("Manabi");
-		equipo.setFechacreacion(LocalDateTime.of(1989,3, 1, 14, 20));
+		Autor autor1 = new Autor();
+		autor1.setNombre("Jose Navaz");
 		
-		this.equipoService.insertar(equipo);
-
-		// BUSCAR
-		LOG.info("Se encontro el equipo: " + this.equipoService.buscar("Liga"));
-
-		// ACTUALIZAR
-
-		Equipo equipo1 = new Equipo();
-		equipo1.setId(4);
-		equipo1.setNombre("Barcelona");
-		equipo1.setLocalidad("España");
-		equipo1.setFechacreacion(LocalDateTime.of(1899,11, 29, 20, 15));
-
-		this.equipoService.actualizar(equipo1);
+		Autor autor2 = new Autor();
+		autor2.setNombre("Maria Vega");
 		
-		// ELIMINAR
-		this.equipoService.eliminar("Elemec");
+		Set<Autor> autores = new HashSet<>();
+		autores.add(autor1);
+		autores.add(autor2);
+		
+		Libro libro = new Libro();
+		libro.setTitulo("Quimica");
+		libro.setPaginas(250);
+		
+		libro.setAutores(autores);
+		
+		this.iLibroService.insertar(libro);
+		
+		
 	}
 
 }
