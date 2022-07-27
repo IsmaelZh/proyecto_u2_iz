@@ -1,6 +1,5 @@
 package com.uce.edu.demo.service;
 
-import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.repository.modelo.onetoone.CiudadanoTarea;
 
 public interface ICiudadadoTareaJpaService {
