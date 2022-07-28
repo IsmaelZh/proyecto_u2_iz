@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.manytomany.Libro;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro;
 
 @Repository
 @Transactional

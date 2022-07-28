@@ -8,17 +8,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/*@Entity
-@Table(name = "matricula")*/
+import com.uce.edu.demo.repository.modelo.onetoone.Ciudadano;
+
+@Entity
+@Table(name = "matricula")
 public class Matricula {
 
 	@Id
 	@Column (name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prop_id_seq")
-	@SequenceGenerator(name = "prop_id_seq", sequenceName = "prop_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matr_id_seq")
+	@SequenceGenerator(name = "matr_id_seq", sequenceName = "matr_id_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "matr_fecha")
@@ -27,10 +31,12 @@ public class Matricula {
 	@Column(name = "matr_valor")
 	private BigDecimal valorMatricula;
 	
-	@Column(name = "matr_propietario")
+	@OneToOne
+	@JoinColumn(name = "matr_id_propietario")
 	private Propietario propietario;
 	
-	@Column(name = "matr_vehiculo")
+	@OneToOne
+	@JoinColumn(name = "matr_id_vehiculo")
 	private Vehiculo vehiculo;
 
 	@Override

@@ -1,6 +1,6 @@
 package com.uce.edu.demo.service;
 
-import com.uce.edu.demo.repository.manytomany.Autor;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor;
 
 public interface IAutorService {
 

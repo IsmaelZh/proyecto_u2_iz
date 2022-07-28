@@ -1,6 +1,6 @@
 package com.uce.edu.demo;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,95 +9,83 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.cajero.modelo.DetalleFactura;
-import com.uce.edu.demo.cajero.modelo.Factura;
-import com.uce.edu.demo.cajero.service.IFacturaService;
+import com.uce.edu.demo.modelo.Cprueba.Propietario;
+import com.uce.edu.demo.modelo.Cprueba.Vehiculo;
+import com.uce.edu.demo.modelo.Cprueba.service.IMatriculaGestorService;
+import com.uce.edu.demo.modelo.Cprueba.service.IPropietarioJpaService;
+import com.uce.edu.demo.modelo.Cprueba.service.IVehiculoJpaService;
 
 @SpringBootApplication
 public class ProyectoU2IzApplication implements CommandLineRunner {
 
-	private static final Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-
-	@Autowired
-	private IFacturaService facturaService;
+private static final Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	
+	@Autowired
+	private IPropietarioJpaService iPropietarioJpaService;
+	
+	@Autowired
+	private IVehiculoJpaService iVehiculoJpaService;
+	
+	@Autowired
+	private IMatriculaGestorService iMatriculaGestorService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2IzApplication.class, args);
 	}
 
+	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-
-//		// 1 Autor con 2 libros
-//		Autor2 autor = new Autor2();
-//		autor.setNombre("Marco Herrera");
-//
-//		Libro2 libro = new Libro2();
-//		libro.setTitulo("Sendo en un bar");
-//		libro.setCantidadpaginas(268);
-//		
-//		Libro2Autor2 libroAutor = new Libro2Autor2();
-//		libroAutor.setAutor(autor);
-//		libroAutor.setLibro(libro);
-//
-//		Libro2 libro2 = new Libro2();
-//		libro2.setTitulo("Longebo");
-//		libro2.setCantidadpaginas(378);
-//		
-//		Libro2Autor2 libroAutor2 = new Libro2Autor2();
-//		libroAutor2.setAutor(autor);
-//		libroAutor2.setLibro(libro2);
-//
-//		List<Libro2Autor2> listaLibros = new ArrayList<>();
-//
-//		listaLibros.add(libroAutor);
-//		listaLibros.add(libroAutor2);
-//
-//		autor.setLibros(listaLibros);
-//
-//		this.iLibro2Service.insertar(libro);
-//		this.iLibro2Service.insertar(libro2);
-//		this.iAutor2Service.insertar(autor);
-//
-//		// 2 autores 1 libro
-//
-//		Libro2 libro3 = new Libro2();
-//		libro3.setTitulo("Militar");
-//		libro3.setCantidadpaginas(965);
-//
-//		Autor2 a1 = new Autor2();
-//		a1.setNombre("Juakin Softonic");
-//		
-//		Libro2Autor2 libro2Autor22 = new Libro2Autor2();
-//		libro2Autor22.setAutor(a1);
-//		libro2Autor22.setLibro(libro3);
-//
-//		Autor2 a2 = new Autor2();
-//		a2.setNombre("Ramon Valdez");
-//		
-//		Libro2Autor2 libro2Autor23 = new Libro2Autor2();
-//		libro2Autor23.setAutor(a2);
-//		libro2Autor23.setLibro(libro3);
-//
-//		List<Libro2Autor2> listaAutor = new ArrayList<>();
-//		listaAutor.add(libro2Autor22);
-//		listaAutor.add(libro2Autor23);
-//
-//		libro3.setAutores(listaAutor);
-//
-//		this.iAutor2Service.insertar(a2);
-//		this.iAutor2Service.insertar(a1);
-//		this.iLibro2Service.insertar(libro3);
-
-		Factura fact = this.facturaService.consultar(1);
+		//--------------------------------------------- Propietario -------------------------------------
 		
-		LOG.info("Numero de factura: " + fact.getNumero());
-		LOG.info("Fecha de factura: " + fact.getFecha());
-		LOG.info("Cliente: " + fact.getCliente().getNumeroTarjeta());
+		//INSERTAR
+		Propietario p = new Propietario();
+		//p.setId(20);
+		p.setNombre("Tomas");
+		p.setApellido("Ojeda");
+		p.setCedula("2596665536");
 		
-		List<DetalleFactura> detalles = fact.getDetalles();
-		for (DetalleFactura i : detalles)
-		LOG.info("Detalle: " + i);
+		this.iPropietarioJpaService.crear(p);
+		
+		//BUSCAR
+	    //LOG.info("Se encontro con JPA el propietario:" + this.iPropietarioJpaService.buscar("0305988895"));
+		
+		//ELIMINAR
+		//this.iPropietarioJpaService.eliminar("0259865428");
+		
+		//-------------------------------------------- Vehiculo ---------------------------------------------
+		
+		//INSERTAR
+		Vehiculo v = new Vehiculo();
+		//v.setId(30);
+		v.setMarca("Volkswagen");
+		v.setModelo("Fox");
+		v.setPlaca("PQL-222");
+		v.setPrecio(new BigDecimal(9300));
+		v.setTipo("Liviano");
+		
+		this.iVehiculoJpaService.insertar(v);
+		
+		//BUSCAR
+		//LOG.info("Se encontro con JPA el vehiculo:" + this.iVehiculoJpaService.buscar("UQW-458"));
+		
+		//ACTUALIZAR
+		Vehiculo v1 = new Vehiculo();
+		v1.setId(17);
+		v1.setMarca(v.getMarca());
+		v1.setModelo(v.getModelo());
+		v1.setPlaca("PJK-507");
+		v1.setPrecio(v.getPrecio());
+		v1.setTipo(v.getTipo());
+		
+		this.iVehiculoJpaService.actualizar(v1);
+		
+		//ELIMINAR
+		//this.iVehiculoJpaService.eliminar("951OJ");
+		
+		//------------------------------------------ Matricula ---------------------------------------------
+		
+		this.iMatriculaGestorService.generar(p.getCedula(), v1.getPlaca());
+			    
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.uce.edu.demo.repository.manytomany;
+package com.uce.edu.demo.repository.modelo.manytomany;
 
 import java.util.Set;
 

@@ -42,12 +42,14 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository {
 	public void actualizar(Vehiculo v) {
 		// TODO Auto-generated method stub
 
-		Query myQuery = this.entityManager.createQuery("UPDATE Vehiculo v SET v.marca = :datoMarca, v.modelo = :datoModelo, v.tipo = :datoTipo, v.precio = :datoPrecio WHERE v.placa = :datoPlaca");
-        myQuery.setParameter("datoPlaca", v.getPlaca());
-        myQuery.setParameter("datoMarca", v.getMarca());
-        myQuery.setParameter("datoModelo", v.getModelo());
-        myQuery.setParameter("datoTipo", v.getTipo());
-        myQuery.setParameter("datoPrecio", v.getPrecio());
+//		Query myQuery = this.entityManager.createQuery("UPDATE Vehiculo v SET v.marca = :datoMarca, v.modelo = :datoModelo, v.tipo = :datoTipo, v.precio = :datoPrecio, v.placa = :datoPlaca");
+//        myQuery.setParameter("datoPlaca", v.getPlaca());
+//        myQuery.setParameter("datoMarca", v.getMarca());
+//        myQuery.setParameter("datoModelo", v.getModelo());
+//        myQuery.setParameter("datoTipo", v.getTipo());
+//        myQuery.setParameter("datoPrecio", v.getPrecio());
+		
+		this.entityManager.merge(v);
 		
 		LOG.info("Se actualizo con JPA el vehiculo: " + v);
 	}

@@ -1,6 +1,6 @@
 package com.uce.edu.demo.repository;
 
-import com.uce.edu.demo.repository.manytomany.Autor;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor;
 
 public interface IAutorRepository {
 
